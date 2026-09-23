@@ -1,3 +1,5 @@
+CREATE TYPE global_role_type AS ENUM ('admin', 'user');
+CREATE TYPE course_role_type AS ENUM ('admin', 'teacher', 'student');
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -77,3 +79,6 @@ CREATE TABLE achievements (
     earned_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     UNIQUE (student_id, rule_id)
 );
+
+CREATE INDEX idx_course_members_course  ON course_members(course_id);
+CREATE INDEX idx_course_members_user ON course_members(user_id);

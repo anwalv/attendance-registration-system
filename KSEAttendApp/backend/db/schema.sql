@@ -1,5 +1,8 @@
 CREATE TYPE global_role_type AS ENUM ('admin', 'user');
 CREATE TYPE course_role_type AS ENUM ('admin', 'teacher', 'student');
+CREATE TYPE attendance_status AS ENUM ('present', 'absent', 'excused');
+CREATE TYPE rule_type AS ENUM ('minimum_percentage', 'bonus_points');
+CREATE TYPE rule_status AS ENUM ('completed', 'in_progress', 'failed');
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -39,6 +42,7 @@ CREATE TABLE events (
     course_id INT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
     series_id INT REFERENCES schedule_series(id) ON DELETE SET NULL,
     title VARCHAR(255) NOT NULL,
+    event_type VARCHAR(50) NOT NULL DEFAULT 'Лекція',
     start_datetime TIMESTAMPTZ NOT NULL,
     end_datetime TIMESTAMPTZ NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
@@ -82,3 +86,10 @@ CREATE TABLE achievements (
 
 CREATE INDEX idx_course_members_course  ON course_members(course_id);
 CREATE INDEX idx_course_members_user ON course_members(user_id);
+CREATE INDEX idx_events_course ON events(course_id);
+CREATE INDEX idx_events_series ON events(series_id);
+CREATE INDEX idx_events_start ON events(start_datetime);
+CREATE INDEX idx_attendance_event ON attendance(event_id);
+CREATE INDEX idx_attendance_student ON attendance(student_id);
+CREATE INDEX idx_qr_sessions_token ON qr_sessions(session_secret);
+CREATE INDEX idx_achievements_student ON achievements(student_id);

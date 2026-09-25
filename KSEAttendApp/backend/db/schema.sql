@@ -5,7 +5,7 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
+    global_role global_role_type NOT NULL DEFAULT 'user', 
     active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -21,7 +21,7 @@ CREATE TABLE course_members (
     id SERIAL PRIMARY KEY,
     course_id INT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    role user_role NOT NULL,
+    course_role course_role_type NOT NULL, 
     UNIQUE (course_id, user_id)
 );
 

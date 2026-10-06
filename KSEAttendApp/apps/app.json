@@ -1,0 +1,47 @@
+{
+    "expo": {
+      "name": "EduAttend",
+      "slug": "eduattend",
+      "scheme": "eduattend",
+      "version": "1.0.0",
+      "orientation": "portrait",
+      "icon": "./assets/icon.png",
+      "userInterfaceStyle": "dark",
+      "splash": {
+        "image": "./assets/splash-icon.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#12111A"
+      },
+      "ios": {
+        "supportsTablet": true,
+        "bundleIdentifier": "ua.kse.eduattend",
+        "infoPlist": {
+          "NSCameraUsageDescription": "Камера потрібна для сканування QR-коду реєстрації присутності",
+          "NSMicrophoneUsageDescription": "Мікрофон не використовується"
+        }
+      },
+      "android": {
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/android-icon-foreground.png",
+          "backgroundColor": "#12111A"
+        },
+        "package": "ua.kse.eduattend",
+        "permissions": [
+          "android.permission.CAMERA"
+        ]
+      },
+      "web": {
+        "favicon": "./assets/favicon.png",
+        "bundler": "metro"
+      },
+      "plugins": [
+        [
+          "expo-camera",
+          {
+            "cameraPermission": "Камера потрібна для сканування QR-коду реєстрації присутності"
+          }
+        ],
+        "expo-web-browser"
+      ]
+    }
+  }
